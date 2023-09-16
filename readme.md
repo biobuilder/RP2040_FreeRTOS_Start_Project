@@ -15,8 +15,9 @@ Installing the integrated development environment package (Visual Studio Code):
 2. When you start Visual Studio Code, type "pico" in the search bar and pick the "pico - Visual Studio Code" shortcut
  - This initializes Visual Studio Code with a bunch of different parameters so that you can use the Pico Debug Probe to upload / debug in real time
 3. Plug in your Pico Debug probe and attach it to the target microcontroller
-4. Make sure the Serial Wire Debug pins are attached (SWD, SCL, and Ground)
-5. Optionally, hook up the UART pins for pin-based debug
+4. Make sure the Serial Wire Debug pins are attached (SD, SC, and Ground)
+ - Review https://www.raspberrypi.com/documentation/microcontrollers/debug-probe.html
+5. Optionally, hook up the UART pins to inspect characters coming in over the hardware serial port
 6. The Pico Debug Probe has a UART to USB converter, which you may view by selecting the proper COM port in the Serial Monitor tab down on the bottom of Visual Studio Code after compiling the code
 
 Setting up FreeRTOS:
@@ -53,20 +54,20 @@ Debugging / Compiling / Uploading the code:
 Adding to the code:
 When creating a new source code folder, such as for a library, you have to tell CMake that these files exits.  Edit the following files:
 1. CMakeLists.txt in the overarching directory folder must include the new subdirectory
-  e.g. add_subdirectory(mylibrary)
+  e.g. "add_subdirectory(mylibrary)"
 
 2. CMakeLists.txt in the source directory must be updated 
-  - add all the source files
-    e.g. set(  SOURCE_FILES 
-               main.c
-               application.c
-               ../somelibrary/somefile.c
-               )
-  - add all the pertinent directories to this particular target
-  e.g. target_include_directories(${PROJECT_NAME}
-                                  PRIVATE ${CMAKE_CURRENT_LIST_DIR}
-                                  PRIVATE ../somelibrary/somesubfolder
-                                  )
+  - add all the source files\
+    e.g. "set(  SOURCE_FILES\ 
+               main.c\
+               application.c\
+               ../somelibrary/somefile.c\
+               )"
+  - add all the pertinent directories to this particular target\
+  e.g. "target_include_directories(${PROJECT_NAME}\
+                                  PRIVATE ${CMAKE_CURRENT_LIST_DIR}\
+                                  PRIVATE ../somelibrary/somesubfolder\
+                                  )"\
 
 CMake is very tedious and there are about 30 different ways to accomplish the same result.  Make sure that you are explicit with your code or else CMake will refuse to link the code together into a coherent structure.  
 
@@ -90,18 +91,19 @@ The FreeRTOSConfig.h file must be included somewhere in your project.  The compi
 This variable is defined in the top level CMakeLists.txt.  Edit this variable if you wish to move FreeRTOSConfig.h somewhere else.
 
 Sometimes, you may wish to build separate sub projects within this main project folder.  You'll need to add the folder, a new CMakeLists.txt, add a new subdirectory() in your top level CMakeLists.txt, so on and so forth.  CMake needs you to tell it everything.  
-When building a new subproject (such as another project within a sub folder), set the compiler target to the project you wish to debug
-  Ctrl + Shift + P -> CMake: Select Build Target
-  Ctrl + Shift + P -> CMake: Select Debug Target
-    - Can optionally select the entire repository as build targets, but this may take a long time
+When building a new subproject (such as another project within a sub folder), set the compiler target to the project you wish to debug\
+  Ctrl + Shift + P -> CMake: Select Build Target\
+  Ctrl + Shift + P -> CMake: Select Debug Target\
+    - Can optionally select the entire repository as build targets, but this may take a long time\
 
 Sometimes, build errors are present with CMake, especially when you change the name of higher level folders.  To get rid of these errors, delete the entire Build folder which erases cached data.  You may also run the CMake command: Delete Cache and Reconfigure.  There are so many chached and hidden variables in CMake that it can easily get confused and quit working.  Reconfiguring and deleting these caches may help resolve unknown build errors with CMake.  If you can't make it work, you may need to reinstall everything from scratch.  Make sure to delete all of the cached files from Visual Studio Code's AppData cache.  The system holds a lot of promise but is very tedious and cryptic.  
 
 If you get the following error:
-"error: internal malfunction: bad programmer detected.
- setting global environment variable WILL_NOT_WORK to True.  
- -> have you tried plugging the schnitzelfritz into the gomberwhopper?
- -> did you forget to include the <internal_obfuscator_cache>?
- -> have you considered another field of expertise?"
+
+error: internal malfunction: bad programmer detected.\
+setting global environment variable WILL_NOT_WORK to True.\ 
+ -> have you tried plugging the schnitzelfritz into the gomberwhopper?\
+ -> did you forget to include the <internal_obfuscator_cache>?\
+ -> have you considered another field of expertise?\
 
 Don't let it make you quit, you will get it eventually.  This basic repository took 30 hours to set up - spend more time coding and less time messing around with the environment.  Or try your luck with another IDE / operating system / compiler.  Good luck. 
