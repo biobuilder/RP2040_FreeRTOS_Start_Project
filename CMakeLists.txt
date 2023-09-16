@@ -34,7 +34,7 @@ endif()
 # for some reason, environment variables (in CMake settings in Visual Studio Code) are not able to configure this variable
 # neither does the build argument in CMake settings:
 # -DFREERTOS_KERNEL_PATH="E:/path/to/FreeRTOS-Kernel"
-# instead, uncomment the line below to create a local defintition of the kernel path
+# instead, use the line below to create a local defintition of the kernel path
 set(FREERTOS_KERNEL_PATH "E:/source/project-repos/cloned-projects/FreeRTOS-Kernel" CACHE PATH "Path to the FreeRTOS Kernel")
 
 # set the FreeRTOS configuration file directory
