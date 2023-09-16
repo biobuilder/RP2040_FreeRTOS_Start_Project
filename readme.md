@@ -67,7 +67,7 @@ When creating a new source code folder, such as for a library, you have to tell 
   e.g. "target_include_directories(${PROJECT_NAME}\
                                   PRIVATE ${CMAKE_CURRENT_LIST_DIR}\
                                   PRIVATE ../somelibrary/somesubfolder\
-                                  )"\
+                                  )"
 
 CMake is very tedious and there are about 30 different ways to accomplish the same result.  Make sure that you are explicit with your code or else CMake will refuse to link the code together into a coherent structure.  
 
@@ -94,7 +94,7 @@ Sometimes, you may wish to build separate sub projects within this main project 
 When building a new subproject (such as another project within a sub folder), set the compiler target to the project you wish to debug\
   Ctrl + Shift + P -> CMake: Select Build Target\
   Ctrl + Shift + P -> CMake: Select Debug Target\
-    - Can optionally select the entire repository as build targets, but this may take a long time\
+    - Can optionally select the entire repository as build targets, but this may take a long time
 
 Sometimes, build errors are present with CMake, especially when you change the name of higher level folders.  To get rid of these errors, delete the entire Build folder which erases cached data.  You may also run the CMake command: Delete Cache and Reconfigure.  There are so many chached and hidden variables in CMake that it can easily get confused and quit working.  Reconfiguring and deleting these caches may help resolve unknown build errors with CMake.  If you can't make it work, you may need to reinstall everything from scratch.  Make sure to delete all of the cached files from Visual Studio Code's AppData cache.  The system holds a lot of promise but is very tedious and cryptic.  
 
@@ -104,6 +104,6 @@ error: internal malfunction: bad programmer detected.\
 setting global environment variable WILL_NOT_WORK to True.\ 
  -> have you tried plugging the schnitzelfritz into the gomberwhopper?\
  -> did you forget to include the <internal_obfuscator_cache>?\
- -> have you considered another field of expertise?\
+ -> have you considered another field of expertise?
 
 Don't let it make you quit, you will get it eventually.  This basic repository took 30 hours to set up - spend more time coding and less time messing around with the environment.  Or try your luck with another IDE / operating system / compiler.  Good luck. 
